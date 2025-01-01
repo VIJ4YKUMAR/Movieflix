@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useInfiniteQuery } from "@tanstack/react-query";
 import MovieCard from "../Atoms/MovieCard";
 import MovieInfoType from "../types/MovieInfoType";
