@@ -1,9 +1,8 @@
-import toast, { Toaster } from "react-hot-toast";
 // import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import MovieInfoType from "../types/MovieInfoType";
 
-const MAX_FAVORITE_LIMIT = 5;
+// const MAX_FAVORITE_LIMIT = 5;
 
 const MovieCard = ({ movieCardProps }: { movieCardProps?: MovieInfoType }) => {
   // const dispatch = useDispatch();
@@ -90,7 +89,6 @@ const MovieCard = ({ movieCardProps }: { movieCardProps?: MovieInfoType }) => {
           />
         </svg>
       </button>
-      <Toaster />
     </div>
   );
 };
