@@ -39,7 +39,9 @@ const MovieDetails = () => {
     );
   }
 
-  const rating = Math.round(movieCardProps?.vote_average * 10) / 10;
+  const rating =
+    movieCardProps?.vote_average > 0 &&
+    Math.round(movieCardProps?.vote_average * 10) / 10;
 
   const API_KEY = import.meta.env.API_KEY;
   const MOVIE_ID = movieCardProps?.id;
@@ -84,18 +86,13 @@ const MovieDetails = () => {
         <div className="md:w-2/3 md:ml-8 mt-5 md:mt-0">
           <h1 className="text-3xl font-bold mb-4">{movieCardProps.title}</h1>
           <div className="flex items-center text-sm mb-4">
-            <span className="mr-3">
-              {movieCardProps.release_date.split("-")[0]}
-            </span>
-            <span className="mr-3">{movieCardProps.runtime} min</span>
+            <span className="mr-3">Released on {movieCardProps?.release_date}</span>
             <span>{movieCardProps.genres?.join(", ")}</span>
           </div>
           <p className="mb-5">{movieCardProps.overview}</p>
           <div className="flex items-center">
             <span className="font-bold mr-2">Rating:</span>
-            <span className="text-green-500 font-bold text-lg">
-              {rating}
-            </span>
+            <span className="text-green-500 font-bold text-lg">{rating}</span>
           </div>
           <div className="flex gap-4 mt-5">
             <button className="px-4 py-2 rounded">Watch Trailer</button>
