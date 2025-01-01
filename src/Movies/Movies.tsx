@@ -15,6 +15,7 @@ type Movies = {
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const API_URL = "https://api.themoviedb.org/3/discover/movie";
+
 const accessToken = import.meta.env.VITE_ACCESS_TOKEN;
 
 const Movies = () => {
