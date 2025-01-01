@@ -30,7 +30,7 @@ const Movies = () => {
     return response.json();
   };
 
-  const { isLoading, data: allMovies } = useQuery<Movies, Error>({
+  const { data: allMovies } = useQuery<Movies, Error>({
     queryKey: ["movies"],
     queryFn: async () => {
       const data = await fetchMovies();

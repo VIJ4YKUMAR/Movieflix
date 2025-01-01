@@ -10,7 +10,7 @@ const MovieCard = ({ movieCardProps }: { movieCardProps?: MovieInfoType }) => {
   //   (state: RootState) => state.countries.favorites
   // );
 
-  const { original_title, id, title, poster_path, release_date, vote_average } = movieCardProps || {};
+  const { title, poster_path, release_date, vote_average } = movieCardProps || {};
 
   const imageBaseUrl = "https://image.tmdb.org/t/p/";
   const imageSize = "w500"; // or 'original'
