@@ -30,8 +30,6 @@ const MovieDetails = () => {
 
   const location = useLocation();
   const { movieCardProps } = location.state || {};
-  console.log("movieCardProps", movieCardProps);
-
 
   if (!movieCardProps) {
     return (
