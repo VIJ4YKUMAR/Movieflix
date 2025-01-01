@@ -30,6 +30,8 @@ const MovieDetails = () => {
 
   const location = useLocation();
   const { movieCardProps } = location.state || {};
+  console.log("movieCardProps", movieCardProps);
+
 
   if (!movieCardProps) {
     return (
@@ -85,9 +87,9 @@ const MovieDetails = () => {
         </div>
         <div className="md:w-2/3 md:ml-8 mt-5 md:mt-0">
           <h1 className="text-3xl font-bold mb-4">{movieCardProps.title}</h1>
-          <div className="flex items-center text-sm mb-4">
+          <div className="flex flex-col text-sm mb-4">
             <span className="mr-3">Released on {movieCardProps?.release_date}</span>
-            <span>{movieCardProps.genres?.join(", ")}</span>
+            <div className="flex items-center gap-2">{movieCardProps.genres?.map((genre: any) => <p>{genre?.name}</p>)}</div>
           </div>
           <p className="mb-5">{movieCardProps.overview}</p>
           <div className="flex items-center">

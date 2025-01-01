@@ -25,7 +25,9 @@ const MovieCard = ({ movieCardProps }: { movieCardProps?: MovieInfoType }) => {
 
   const [favorite, setFavorite] = useState<boolean>(isFavoriteMovie(id));
 
-  const toggleFavorite = () => {
+  const toggleFavorite = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
     if (favorite) {
       removeFavoriteMovie(id);
     } else {
@@ -39,10 +41,6 @@ const MovieCard = ({ movieCardProps }: { movieCardProps?: MovieInfoType }) => {
   const handleNavigate = () => {
     navigate(`/movie/${id}`, { state: { movieCardProps } });
   };
-
-  // const handleCardClick = () => {
-  //   navigate(`/country/${encodeURIComponent(data?.name?.common || "")}`, { state: { country: data } });
-  // };
 
   return (
     <div
