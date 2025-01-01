@@ -1,7 +1,7 @@
 import { ReactNode, useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import countryExplorer from "../assets/country-explorer.png";
+// import countryExplorer from "../assets/country-explorer.png";
 
 import ScrollToTopButton from "../Atoms/ScrollToTopButton";
 import { Link } from "react-router-dom";
@@ -10,13 +10,13 @@ interface LayoutProps {
   children: ReactNode;
 }
 
-const navigation = [{ name: "Favorites", href: "/favorite-countries", key: 1 }];
+const navigation = [{ name: "Favorites", href: "/favorite-movies", key: 1 }];
 
 const Layout = ({ children }: LayoutProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div>
+    <div className="font-mono">
       <header className="absolute inset-x-0 top-0 z-50">
         <nav
           aria-label="Global"
@@ -24,9 +24,9 @@ const Layout = ({ children }: LayoutProps) => {
         >
           <div className="flex lg:flex-1 items-center gap-2">
             <a href="/" className="flex items-center gap-2 -m-1.5 p-1.5">
-              <span className="sr-only">Country Explorer</span>
-              <img alt="" src={countryExplorer} className="h-8 w-auto" />
-              <p className="text-xl font-mono font-semibold">Country Explorer</p>
+              <span className="sr-only">Movieflix</span>
+              {/* <img alt="" src={countryExplorer} className="h-8 w-auto" /> */}
+              <p className="text-xl font-semibold">Movieflix</p>
             </a>
           </div>
           <div className="flex lg:hidden">
@@ -59,8 +59,8 @@ const Layout = ({ children }: LayoutProps) => {
           <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">Country Explorer</span>
-                <img alt="" src={countryExplorer} className="h-8 w-auto" />
+                <span className="sr-only">MovieFlix</span>
+                {/* <img alt="" src={countryExplorer} className="h-8 w-auto" /> */}
               </a>
               <button
                 type="button"
@@ -93,7 +93,7 @@ const Layout = ({ children }: LayoutProps) => {
         </Dialog>
       </header>
       <div className="relative isolate lg:px-8">
-        <div
+        {/* <div
           aria-hidden="true"
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
         >
@@ -104,10 +104,10 @@ const Layout = ({ children }: LayoutProps) => {
             }}
             className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
           />
-        </div>
+        </div> */}
         <main className="relative z-10 mt-32 p-4">{children}</main>
         <ScrollToTopButton />
-        <div
+        {/* <div
           aria-hidden="true"
           className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
         >
@@ -118,7 +118,7 @@ const Layout = ({ children }: LayoutProps) => {
             }}
             className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-70 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );
