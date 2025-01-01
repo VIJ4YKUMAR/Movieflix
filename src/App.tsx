@@ -1,7 +1,14 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
 
-  return <>React starter template with typescript and tailwind css</>;
+  return <Router>
+    <Routes>
+      <Route>
+
+      </Route>
+    </Routes>
+  </Router>;
 }
 
 export default App;
