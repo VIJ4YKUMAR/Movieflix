@@ -1,47 +1,44 @@
-// import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MovieInfoType from "../types/MovieInfoType";
-
-// const MAX_FAVORITE_LIMIT = 5;
+import {
+  addFavoriteMovie,
+  removeFavoriteMovie,
+  isFavoriteMovie,
+} from "../utilities/favorites";
+import { useState } from "react";
 
 const MovieCard = ({ movieCardProps }: { movieCardProps?: MovieInfoType }) => {
-  // const dispatch = useDispatch();
-  // const favorites = useSelector(
-  //   (state: RootState) => state.countries.favorites
-  // );
 
-  const { title, poster_path, release_date, vote_average } = movieCardProps || {};
+  const {
+    id = 0,
+    title,
+    poster_path,
+    release_date,
+    vote_average = 0,
+  } = movieCardProps || {};
 
   const imageBaseUrl = "https://image.tmdb.org/t/p/";
-  const imageSize = "w500"; // or 'original'
+  const imageSize = "w500";
   const fullImageUrl = `${imageBaseUrl}${imageSize}${poster_path}`;
 
+  const rating = Math.round(vote_average * 10) / 10;
 
-  // const navigate = useNavigate();
+  const [favorite, setFavorite] = useState<boolean>(isFavoriteMovie(id));
 
-  // const isFavorite = favorites.some(
-  //   (fav) => fav.name.common === data?.name.common
-  // );
+  const toggleFavorite = () => {
+    if (favorite) {
+      removeFavoriteMovie(id);
+    } else {
+      addFavoriteMovie(id);
+    }
+    setFavorite(!favorite);
+  };
 
-  // const handleFavoriteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-  //   e.stopPropagation();
-  //   e.preventDefault();
+  const navigate = useNavigate();
 
-  //   if (data) {
-  //     if (isFavorite) {
-  //       dispatch(removeFromFavorites(data));
-  //     } else {
-  //       if (favorites?.length === MAX_FAVORITE_LIMIT) {
-  //         return toast.error("maximum limit reached", {
-  //           duration: 2000,
-  //           position: "bottom-center",
-  //           style: { background: "white" },
-  //         });
-  //       }
-  //       dispatch(addToFavorites(data));
-  //     }
-  //   }
-  // };
+  const handleNavigate = () => {
+    navigate(`/movie/${id}`, { state: { movieCardProps } });
+  };
 
   // const handleCardClick = () => {
   //   navigate(`/country/${encodeURIComponent(data?.name?.common || "")}`, { state: { country: data } });
@@ -49,8 +46,8 @@ const MovieCard = ({ movieCardProps }: { movieCardProps?: MovieInfoType }) => {
 
   return (
     <div
-      className="flex flex-col border-white/40 p-2 bg-white/30 backdrop-blur-md shadow-md hover:shadow-lg cursor-pointer"
-    // onClick={handleCardClick}
+      className="flex flex-col items-center border-white/40 p-2 bg-white/30 rounded-lg shadow-md hover:shadow-lg cursor-pointer"
+      onClick={handleNavigate}
     >
       <div className="shadow-md rounded-lg">
         <img
@@ -59,24 +56,20 @@ const MovieCard = ({ movieCardProps }: { movieCardProps?: MovieInfoType }) => {
           alt="movie-poster"
         />
       </div>
-      <div className="font-mono mt-3">
-        <p className="font-bold">{title}</p>
-        <div className="flex gap-8 text-sm items-center">
-          <p className="text-gray-700">{release_date}</p>
-          <p className="text-gray-700">
-            <span className="text-yellow-400 text-lg">★</span>
-            {" "}{vote_average}
-          </p>
-        </div>
+      <div className="flex flex-col items-center font-mono mt-3">
+        <p className="font-bold text-sm sm:text-lg text-center">{title}</p>
+        <p className="text-sm text-gray-700">{release_date}</p>
+        <p className="text-sm text-gray-700">
+          <span className="text-yellow-400 text-lg">★</span> {rating}
+        </p>
       </div>
       <button
-        className="self-end"
-      // className={`self-end ${isFavorite ? "text-red-500" : "text-gray-500"}`}
-      // onClick={handleFavoriteClick}
+        className={`self-end ${favorite ? "text-red-500" : "text-gray-500"}`}
+        onClick={toggleFavorite}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          // fill={isFavorite ? "currentColor" : "none"}
+          fill={favorite ? "currentColor" : "none"}
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"

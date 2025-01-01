@@ -1,7 +1,6 @@
 import { ReactNode, useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-// import countryExplorer from "../assets/country-explorer.png";
 
 import ScrollToTopButton from "../Atoms/ScrollToTopButton";
 import { Link } from "react-router-dom";
@@ -25,7 +24,6 @@ const Layout = ({ children }: LayoutProps) => {
           <div className="flex lg:flex-1 items-center gap-2">
             <a href="/" className="flex items-center gap-2 -m-1.5 p-1.5">
               <span className="sr-only">Movieflix</span>
-              {/* <img alt="" src={countryExplorer} className="h-8 w-auto" /> */}
               <p className="text-xl font-semibold">Movieflix</p>
             </a>
           </div>
@@ -41,7 +39,7 @@ const Layout = ({ children }: LayoutProps) => {
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item) => (
-              <Link key={item.key} to="/favorite-countries">
+              <Link key={item.key} to="/favorite-movies">
                 {" "}
                 <p className="text-sm/6 font-semibold text-gray-900">
                   {item.name}
@@ -60,7 +58,6 @@ const Layout = ({ children }: LayoutProps) => {
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">MovieFlix</span>
-                {/* <img alt="" src={countryExplorer} className="h-8 w-auto" /> */}
               </a>
               <button
                 type="button"
@@ -77,7 +74,7 @@ const Layout = ({ children }: LayoutProps) => {
                   {navigation.map((item) => (
                     <Link
                       key={item.key}
-                      to="/favorite-countries"
+                      to="/favorite-movies"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {" "}
