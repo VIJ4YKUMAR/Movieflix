@@ -50,7 +50,7 @@ const MovieDetails = () => {
   const getCastAndCrew = async (movieId: number) => {
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${API_KEY}&language=en-US`,
+        `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${API_KEY}&include_adult=false&language=en-US`,
         {
           headers: {
             Authorization: `Bearer ${ACCESS_TOKEN}`,

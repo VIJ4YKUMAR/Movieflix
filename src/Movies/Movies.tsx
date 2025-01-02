@@ -41,8 +41,8 @@ const Movies = () => {
     const endpoint = query.trim()
       ? `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
         query
-      )}&page=${pageParam}`
-      : `${API_URL}?api_key=${API_KEY}&page=${pageParam}`;
+      )}&page=${pageParam}&include_adult=false&certification_country=US&certification.lte=PG-13`
+      : `${API_URL}?api_key=${API_KEY}&page=${pageParam}&include_adult=false`;
     const response = await fetch(endpoint, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
