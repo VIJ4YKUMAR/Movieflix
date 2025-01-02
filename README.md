@@ -1,9 +1,13 @@
-A React project template preconfigured with TypeScript and ESLint to help you quickly start a new project.
+View the live website here => https://vj-movieflix.netlify.app/
 
-setup instructions:
+User can create account and login using that account
 
-=> clone the repo locally.
+user can view about movies and movie details by clicking on the movie card
 
-=> go to package.json file and edit the project name in the first lines as per your wish and then run npm install.
+user can also search movies by entering the search terms in the search bar
 
-=> then you're good to start with your react project pre-configured with typescript and eslint.
+user can add and remove the movies as their favorites
+
+the application uses TMDB's open source movie APIs for fetching the movie data
+
+TechStack used: Reactjs with typescript, Tailwindcss and HTML/CSS
