@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login as loginAction } from "../Reducers/authSlice";
-import { login } from "../Services/authservice";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,8 +14,22 @@ const Login = () => {
     e.preventDefault();
     setError("");
     try {
-      const user = await login(email, password);
-      dispatch(loginAction(user));
+      const storedUsers = JSON.parse(localStorage.getItem("users") || "[]");
+
+      const existingUser = storedUsers.find(
+        (user: any) => user.email === email
+      );
+
+      if (!existingUser) {
+        throw new Error("No account exists with this email.");
+      }
+
+      if (existingUser.password !== password) {
+        throw new Error("Incorrect email or password.");
+      }
+
+      localStorage.setItem("currentUser", JSON.stringify(existingUser));
+      dispatch(loginAction(existingUser));
       navigate("/");
     } catch (err: any) {
       setError(err.message);
@@ -24,8 +37,8 @@ const Login = () => {
   };
 
   const onSignupClick = () => {
-    navigate("/signup")
-  }
+    navigate("/signup");
+  };
 
   return (
     <div className="flex justify-center items-center">
@@ -55,7 +68,10 @@ const Login = () => {
         </>
         <div className="mt-4">
           <p className="text-center mb-4">Or</p>
-          <button className="w-full bg-red-500 p-2 rounded" onClick={onSignupClick}>
+          <button
+            className="w-full bg-red-500 p-2 rounded"
+            onClick={onSignupClick}
+          >
             Sign Up
           </button>
         </div>
