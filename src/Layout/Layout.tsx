@@ -21,6 +21,10 @@ const Layout = ({ children }: LayoutProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showLogout, setShowLogout] = useState(false);
 
+  const isLoggedIn = !!localStorage.getItem("user");
+
+  const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
+
   const toggleLogout = () => {
     setShowLogout(!showLogout);
   };
@@ -54,38 +58,41 @@ const Layout = ({ children }: LayoutProps) => {
               <p className="text-xl font-semibold">Movieflix</p>
             </a>
           </div>
-          <div className="flex lg:hidden">
-            <button
-              type="button"
-              onClick={openMobileMenu}
-              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white"
-            >
-              <span className="sr-only">Open main menu</span>
-              <Bars3Icon aria-hidden="true" className="size-6" />
-            </button>
-          </div>
-
-          <div className="hidden lg:flex lg:gap-x-12">
-            {navigation.map((item) => (
-              <div key={item.key} className="relative">
-                <Link
-                  to={item.href || "#"}
-                  onClick={item.key === 2 ? toggleLogout : undefined}
-                  className="flex items-center gap-x-2"
+          {!isAuthPage && isLoggedIn && (
+            <>
+              <div className="flex lg:hidden">
+                <button
+                  type="button"
+                  onClick={openMobileMenu}
+                  className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white"
                 >
-                  {item.name}
-                </Link>
-                {showLogout && item.key === 2 && (
-                  <button
-                    onClick={handleLogout}
-                    className="absolute top-full -left-7 mt-2 p-2 border border-white rounded"
-                  >
-                    Logout
-                  </button>
-                )}
+                  <span className="sr-only">Open main menu</span>
+                  <Bars3Icon aria-hidden="true" className="size-6" />
+                </button>
               </div>
-            ))}
-          </div>
+              <div className="hidden lg:flex lg:gap-x-12">
+                {navigation.map((item) => (
+                  <div key={item.key} className="relative">
+                    <Link
+                      to={item.href || "#"}
+                      onClick={item.key === 2 ? toggleLogout : undefined}
+                      className="flex items-center gap-x-2"
+                    >
+                      {item.name}
+                    </Link>
+                    {showLogout && item.key === 2 && (
+                      <button
+                        onClick={handleLogout}
+                        className="absolute top-full -left-7 mt-2 p-2 border border-white rounded"
+                      >
+                        Logout
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </nav>
 
         <Dialog
