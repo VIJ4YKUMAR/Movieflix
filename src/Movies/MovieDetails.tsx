@@ -155,7 +155,7 @@ const MovieDetails = () => {
         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-3 mt-10">
           {recommendations &&
             recommendations.map((movie) => (
-              <div key={movie.id} className="flex flex-col items-center cursor-pointer">
+              <div key={movie.id} className="flex flex-col items-center">
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={movie.title}
