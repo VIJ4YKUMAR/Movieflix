@@ -27,6 +27,7 @@ const ProfileCard = ({ profileData }: { profileData: any }) => {
 const MovieDetails = () => {
   const [cast, setCast] = useState<any[]>([]);
   const [crew, setCrew] = useState<any[]>([]);
+  const [recommendations, setRecommendations] = useState<any[]>([]);
 
   const location = useLocation();
   const { movieCardProps } = location.state || {};
@@ -67,9 +68,29 @@ const MovieDetails = () => {
     }
   };
 
+  const getRecommendations = async (movieId: number) => {
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${API_KEY}&language=en-US&page=1`,
+        {
+          headers: {
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+
+      setRecommendations(data.results);
+    } catch (error) {
+      console.error("Error fetching recommendations:", error);
+    }
+  };
+
   useEffect(() => {
     if (MOVIE_ID) {
       getCastAndCrew(MOVIE_ID);
+      getRecommendations(MOVIE_ID);
     }
   }, [MOVIE_ID]);
 
@@ -127,6 +148,22 @@ const MovieDetails = () => {
             crew
               .slice(1, 10)
               .map((item) => <ProfileCard key={item.id} profileData={item} />)}
+        </div>
+      </div>
+      <div className="mt-10">
+        <p className="text-bold text-center text-2xl">You May Also Like</p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-3 mt-10">
+          {recommendations &&
+            recommendations.map((movie) => (
+              <div key={movie.id} className="flex flex-col items-center cursor-pointer">
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  alt={movie.title}
+                  className="w-full rounded-lg shadow-lg"
+                />
+                <p className="mt-2 text-center">{movie.title}</p>
+              </div>
+            ))}
         </div>
       </div>
     </>
