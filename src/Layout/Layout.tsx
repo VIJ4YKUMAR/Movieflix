@@ -30,6 +30,7 @@ const Layout = ({ children }: LayoutProps) => {
     navigate("/login");
     console.log("User logged out");
     setMobileMenuOpen(false);
+    setShowLogout(false);
   };
 
   const closeMobileMenu = () => {
