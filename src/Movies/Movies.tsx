@@ -28,12 +28,12 @@ const Movies = () => {
     }, 500);
     return () => {
       clearTimeout(handler);
-    }
+    };
   }, [query]);
 
   const fetchMovies = async ({
     pageParam = 1,
-    queryKey
+    queryKey,
   }: {
     pageParam: number;
     queryKey: [string, string];
@@ -110,31 +110,35 @@ const Movies = () => {
             placeholder="Search for a movie..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="p-2 border border-gray-300 rounded-lg w-2/3 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+            className="p-2 border text-black-70 border-gray-300 text-black rounded-lg w-2/3 focus:outline-none focus:ring-2 focus:ring-indigo-600"
           />
         </form>
         <p className="font-extralight text-center text-3xl">All Movies</p>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-10">
-        {movies.map((movie, index) => {
-          if (movies.length === index + 1) {
+      {movies?.length > 0 ? (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-10">
+          {movies.map((movie, index) => {
+            if (movies.length === index + 1) {
+              return (
+                <div ref={lastMovieRef} key={movie.id}>
+                  <MovieCard movieCardProps={movie} />
+                </div>
+              );
+            }
             return (
-              <div ref={lastMovieRef} key={movie.id}>
-                <MovieCard movieCardProps={movie} />
-              </div>
+              <MovieCard
+                key={movie.id}
+                movieCardProps={{
+                  ...movie,
+                  isFavorite: favoriteIds.includes(movie.id),
+                }}
+              />
             );
-          }
-          return (
-            <MovieCard
-              key={movie.id}
-              movieCardProps={{
-                ...movie,
-                isFavorite: favoriteIds.includes(movie.id),
-              }}
-            />
-          );
-        })}
-      </div>
+          })}
+        </div>
+      ) : (
+        <p className="text-center text-bold text-2xl mt-20">{`No movies found :(`}</p>
+      )}
       {status === "loading" && (
         <div className="flex justify-center items-center">
           <p>Loading...</p>
@@ -142,7 +146,7 @@ const Movies = () => {
       )}
       {isFetching && !isFetchingNextPage && (
         <div className="flex justify-center items-center">
-          <p>Fetching more movies...</p>
+          <p>Fetching movies...</p>
         </div>
       )}
     </div>

@@ -11,7 +11,7 @@ interface LayoutProps {
 const navigation = [
   { name: "Favorites", href: "/favorite-movies", key: 1 },
   {
-    name: <UserIcon className="h-5 w-5 text-black" />,
+    name: <UserIcon className="h-5 w-5 text-white" />,
     key: 2,
   },
 ];
@@ -42,8 +42,8 @@ const Layout = ({ children }: LayoutProps) => {
   }
 
   return (
-    <div className="font-mono">
-      <header className="absolute inset-x-0 top-0 z-50">
+    <div className="font-mono bg-gray-800 text-white min-h-screen">
+      <header className="absolute bg-gray-800 inset-x-0 top-0 z-50">
         <nav
           aria-label="Global"
           className="flex items-center justify-between p-6 lg:px-8"
@@ -58,7 +58,7 @@ const Layout = ({ children }: LayoutProps) => {
             <button
               type="button"
               onClick={openMobileMenu}
-              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white"
             >
               <span className="sr-only">Open main menu</span>
               <Bars3Icon aria-hidden="true" className="size-6" />
@@ -78,7 +78,7 @@ const Layout = ({ children }: LayoutProps) => {
                 {showLogout && item.key === 2 && (
                   <button
                     onClick={handleLogout}
-                    className="absolute top-full -left-7 mt-2 p-2 border border-gray-800 rounded"
+                    className="absolute top-full -left-7 mt-2 p-2 border border-white rounded"
                   >
                     Logout
                   </button>
@@ -94,7 +94,7 @@ const Layout = ({ children }: LayoutProps) => {
           className="lg:hidden"
         >
           <div className="fixed inset-0 z-50" />
-          <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-800 text-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">MovieFlix</span>
@@ -105,7 +105,7 @@ const Layout = ({ children }: LayoutProps) => {
                 className="-m-2.5 rounded-md p-2.5 text-gray-700"
               >
                 <span className="sr-only">Close menu</span>
-                <XMarkIcon aria-hidden="true" className="size-6" />
+                <XMarkIcon aria-hidden="true" className="size-6 text-white" />
               </button>
             </div>
 
@@ -124,7 +124,7 @@ const Layout = ({ children }: LayoutProps) => {
                       {showLogout && item.key === 2 && (
                         <button
                           onClick={handleLogout}
-                          className="absolute top-full border border-gray-800 mt-2 p-2 rounded"
+                          className="absolute top-full border border-white mt-2 p-2 rounded"
                         >
                           Logout
                         </button>
@@ -139,7 +139,7 @@ const Layout = ({ children }: LayoutProps) => {
       </header>
 
       <div className="relative isolate lg:px-8">
-        <main className="relative z-10 mt-32 p-4">{children}</main>
+        <main className="relative z-10 mt-16 p-4">{children}</main>
         <ScrollToTopButton />
       </div>
     </div>

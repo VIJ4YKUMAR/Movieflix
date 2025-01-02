@@ -8,7 +8,6 @@ import {
 import { useState } from "react";
 
 const MovieCard = ({ movieCardProps }: { movieCardProps?: MovieInfoType }) => {
-
   const {
     id = 0,
     title,
@@ -44,21 +43,19 @@ const MovieCard = ({ movieCardProps }: { movieCardProps?: MovieInfoType }) => {
 
   return (
     <div
-      className="flex flex-col items-center border-white/40 p-2 bg-white/30 rounded-lg shadow-md hover:shadow-lg cursor-pointer"
+      className="flex flex-col items-center p-4 rounded-xl shadow-lg cursor-pointer border border-white/20 hover:scale-105 transform transition-transform duration-200"
       onClick={handleNavigate}
     >
-      <div className="shadow-md rounded-lg">
-        <img
-          className="rounded-lg w-full h-52 sm:h-auto object-fit"
-          src={fullImageUrl}
-          alt="movie-poster"
-        />
-      </div>
-      <div className="flex flex-col items-center font-mono mt-3">
+      <img
+        className="rounded-lg w-full h-52 sm:h-auto object-cover"
+        src={fullImageUrl}
+        alt="movie-poster"
+      />
+      <div className="flex flex-col items-center font-mono text-white mt-3">
         <p className="font-bold text-sm sm:text-lg text-center">{title}</p>
-        <p className="text-sm text-gray-700">{release_date}</p>
-        <p className="text-sm text-gray-700">
-          <span className="text-yellow-400 text-lg">★</span> {rating}
+        <p className="text-sm text-gray-400">{release_date}</p>
+        <p className="text-sm">
+          <span className="text-yellow-400 text-lg">★</span> {rating} / 10
         </p>
       </div>
       <button

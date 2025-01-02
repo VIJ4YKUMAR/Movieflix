@@ -29,7 +29,7 @@ const Login = () => {
 
   return (
     <div className="flex justify-center items-center">
-      <form className="bg-white p-5 shadow-md rounded-lg" onSubmit={handleSubmit}>
+      <form className="p-5" onSubmit={handleSubmit}>
         <>
           <h2 className="text-xl font-bold mb-4 text-center">Login</h2>
           {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
@@ -38,7 +38,7 @@ const Login = () => {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-2 border rounded mb-3"
+            className="w-full text-black p-2 border rounded mb-3"
             required
           />
           <input
@@ -46,16 +46,16 @@ const Login = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-2 border rounded mb-3"
+            className="w-full text-black p-2 border rounded mb-3"
             required
           />
-          <button type="submit" className="w-full bg-indigo-600 text-white p-2 rounded">
+          <button type="submit" className="w-full bg-green-500 p-2 rounded">
             Login
           </button>
         </>
         <div className="mt-4">
           <p className="text-center mb-4">Or</p>
-          <button className="w-full bg-indigo-600 text-white p-2 rounded" onClick={onSignupClick}>
+          <button className="w-full bg-red-500 p-2 rounded" onClick={onSignupClick}>
             Sign Up
           </button>
         </div>
